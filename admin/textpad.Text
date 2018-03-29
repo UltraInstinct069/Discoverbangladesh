@@ -1,0 +1,54 @@
+<h2>Info</h2>
+			<?php
+        	$sql = "SELECT * FROM LocalGuideInfo";
+        	$result = mysqli_query($con,$sql);
+	        while($db_field = mysqli_fetch_assoc($result)){
+	        	$a=$db_field['GuideId'];?>
+				<div class="form-group">
+			      <label for="email">Guide Id: <?php echo ''.$db_field['GuideId']; ?></label>
+			      </div>
+				<div class="form-group">
+			      <label for="email">First Name: <?php echo ''.$db_field['FirstName']; ?></label> </div>
+			    <div class="form-group">
+			      <label for="email">Last Name: <?php echo ''.$db_field['LastName']; ?></label>
+			      </div>
+			    <div class="form-group">
+			      <label for="email">Date Of Birth: <?php echo ''.$db_field['DateOfBirth']; ?></label></div>
+			    <div class="form-group">
+			      <label for="email">Gender: <?php echo ''.$db_field['Gender']; ?></label></div>
+			    <div class="form-group">
+			      <label for="email">Email: <?php echo ''.$db_field['Email']; ?></label></div>
+			    <div class="form-group">
+			      <label for="houseno">HouseNo: <?php echo ''.$db_field['HouseNo']; ?></label></div>
+			    <div class="form-group">
+			      <label for="roadno">RoadNo: <?php echo ''.$db_field['RoadNo']; ?></label></div>
+			    <div class="form-group">
+			      <label for="post">Post: <?php echo ''.$db_field['Post']; ?></label></div>
+			    <div class="form-group">
+			      <label for="thana">Thana: <?php echo ''.$db_field['Thana']; ?></label></div>
+			    <div class="form-group">
+			      <label for="district">District: <?php echo ''.$db_field['District']; ?></label></div>
+
+	        <?php
+        	$sql = "SELECT Contact FROM LocalGuideInfo_Contact where GuideId=$a";
+        	$result1 = mysqli_query($con,$sql);$i = 1;$j=1;
+	        while($row1 = mysqli_fetch_array($result1)){?>
+	        	<div class="form-group">
+			      <label for="contact">Contact<?php echo $i; $i++;?>:<?php echo ''.$row1['Contact']; ?></label>
+			    </div>
+			    <?php }?>
+			    <?php
+        	$sql = "SELECT * FROM Availibility where GuideId='$a' order by AvailibilityId desc limit 1";
+        	$result2 = mysqli_query($con,$sql);
+	        $row2 = mysqli_fetch_assoc($result2);
+	        $s=$row2['AvailibilityId'];?>
+	        		<div class="form-group">
+			      <label for="available">Available: <?php echo ''.$row2['AvailableTime']; ?></label>
+			    </div>	
+			    	<div class="form-group">
+			      <label for="availabletime">Available Time: <?php echo ''.$row2['AvailableTime']; ?></label>
+			    </div>	
+			    <div class="form-group">
+			      <label for="approve">Approved: <?php echo ''.$db_field['Approve']; ?></label></div>
+			    
+			    <?php } ?>
